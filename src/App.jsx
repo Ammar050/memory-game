@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 
+// componenets 
+import SingleCard from './components/SingleCard'
+
 const cardImages = [
     {src: '/img/helmet-1.png' }, 
     {src: '/img/potion-1.png' }, 
@@ -14,6 +17,8 @@ function App() {
 
     const [ cards, setCards ] = useState([])
     const [ turn, setTurn ] = useState(0)
+    const [ choiceOne, setChoiceOne ] = useState(null)
+    const [ choiceTwo, setChoiceTwo ] = useState(null)
 
   // shuffle the cards
   const shuffleCards = () => {
@@ -25,6 +30,12 @@ function App() {
     setTurn(0)
   }
 
+  // handle the choice 
+  const handleChoice = (card) => {
+    choiceOne ? setChoiceTwo(card) : setChoiceOne(card)
+  }
+
+  // shuffle the cards on first render
   useEffect(() => {
     shuffleCards()
   }, [])
@@ -36,12 +47,11 @@ function App() {
       
       <div className="cards">
         { cards.map( card => (
-          <div className="card" key={card.id}> 
-            <div>
-              <img src={card.src} alt="card front" className="image-front" />
-              <img src="/img/cover.png" alt="card back" className="image-back" />
-            </div>
-          </div>
+          <SingleCard 
+            card={card} 
+            handleChoice={handleChoice} 
+            key={card.id} 
+          />
         )) }
       </div>
     </div>
