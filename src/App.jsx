@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 
 const cardImages = [
@@ -25,10 +25,25 @@ function App() {
     setTurn(0)
   }
 
+  useEffect(() => {
+    shuffleCards()
+  }, [])
+
   return (
     <div className="App">
       <h1>Memory Game</h1>
       <button onClick={shuffleCards}>New Game</button>
+      
+      <div className="cards">
+        { cards.map( card => (
+          <div className="card" key={card.id}> 
+            <div>
+              <img src={card.src} alt="card front" className="image-front" />
+              <img src="/img/cover.png" alt="card back" className="image-back" />
+            </div>
+          </div>
+        )) }
+      </div>
     </div>
   );
 }
