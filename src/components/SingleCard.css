@@ -13,6 +13,9 @@
     -o-border-radius: 6px;
 }
 
+
+/* front of card - the picture */
+
 .card .image-front {
     transform: rotateY(90deg);
     -webkit-transform: rotateY(90deg);
@@ -20,6 +23,11 @@
     -ms-transform: rotateY(90deg);
     -o-transform: rotateY(90deg);
     position: absolute;
+    transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
 }
 
 .flipped .image-front {
@@ -28,8 +36,27 @@
     -moz-transform: rotateY(0deg);
     -ms-transform: rotateY(0deg);
     -o-transform: rotateY(0deg);
+    transition-delay: 0.2s;
 }
+
+
+/* back of card - the cover */
 
 .card .image-back {
     cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition-delay: 0.2s;
+}
+
+.flipped .image-back {
+    transform: rotateY(90deg);
+    -webkit-transform: rotateY(90deg);
+    -moz-transform: rotateY(90deg);
+    -ms-transform: rotateY(90deg);
+    -o-transform: rotateY(90deg);
+    transition-delay: 0s;
 }
