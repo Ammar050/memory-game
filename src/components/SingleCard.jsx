@@ -13,7 +13,7 @@ const SingleCard = ({ card, handleChoice, flipped, canClick }) => {
             <div className={ flipped && 'flipped'}>
               <img src={card.src} alt="card front" className="image-front" />
               <img 
-                src="/img/cover.png" 
+                src="./img/cover.png" 
                 alt="card back" 
                 className={`image-back ${!canClick && 'unclickable'}`}
                 onClick={handleClick} 
