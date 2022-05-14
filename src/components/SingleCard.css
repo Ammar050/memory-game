@@ -60,3 +60,10 @@
     -o-transform: rotateY(90deg);
     transition-delay: 0s;
 }
+
+
+/* unclickable */
+
+.unclickable {
+    cursor: not-allowed !important;
+}

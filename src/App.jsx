@@ -19,6 +19,7 @@ function App() {
     const [ turns, setTurns ] = useState(0)
     const [ choiceOne, setChoiceOne ] = useState(null)
     const [ choiceTwo, setChoiceTwo ] = useState(null)
+    const [ canClick, setCanclick ] = useState(true)
 
   // shuffle the cards
   const shuffleCards = () => {
@@ -28,6 +29,9 @@ function App() {
 
     setCards(shuffledCards)
     setTurns(0)
+    setChoiceOne(null)
+    setChoiceTwo(null)
+    setCanclick(true)
   }
 
   // handle the choice 
@@ -38,6 +42,7 @@ function App() {
   // compare the choices
   const compareSelectedChoices = () => { 
     if(choiceOne && choiceTwo) {
+      setCanclick(false)
       if( choiceOne.src === choiceTwo.src ) {
         makeMatched()
         resetChoices()
@@ -63,6 +68,7 @@ function App() {
     setChoiceOne(null)
     setChoiceTwo(null)
     setTurns(turns + 1)
+    setCanclick(true)
   }
 
   // compare 2 selected cards
@@ -75,14 +81,15 @@ function App() {
     <div className="App">
       <h1>Memory Game</h1>
       <h3>{turns}</h3>
-      <button onClick={shuffleCards}>New Game</button>
+      <button onClick={shuffleCards}>{cards.length ? 'New Game' : 'Start Game'}</button>
       
       <div className="cards">
         { cards.map( card => (
           <SingleCard 
             card={card} 
             handleChoice={handleChoice}
-            flipped={card === choiceOne || card === choiceTwo || card.matched } 
+            flipped={card === choiceOne || card === choiceTwo || card.matched }
+            canClick={canClick} 
             key={card.id} 
           />
         )) }
