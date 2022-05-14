@@ -38,8 +38,12 @@ function App() {
   // compare the choices
   const compareSelectedChoices = () => { 
     if(choiceOne && choiceTwo) {
-      choiceOne.src === choiceTwo.src && makeMatched()
-      resetChoices()
+      if( choiceOne.src === choiceTwo.src ) {
+        makeMatched()
+        resetChoices()
+      } else {
+        setTimeout(() => resetChoices(), 1000)
+      }
     }
   }
 
@@ -66,7 +70,7 @@ function App() {
     compareSelectedChoices()
   }, [choiceOne, choiceTwo])
 
-  
+
   return (
     <div className="App">
       <h1>Memory Game</h1>
@@ -77,7 +81,8 @@ function App() {
         { cards.map( card => (
           <SingleCard 
             card={card} 
-            handleChoice={handleChoice} 
+            handleChoice={handleChoice}
+            flipped={card === choiceOne || card === choiceTwo || card.matched } 
             key={card.id} 
           />
         )) }
