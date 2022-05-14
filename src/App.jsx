@@ -5,12 +5,12 @@ import './App.css'
 import SingleCard from './components/SingleCard'
 
 const cardImages = [
-    {src: '/img/helmet-1.png' }, 
-    {src: '/img/potion-1.png' }, 
-    {src: '/img/ring-1.png' }, 
-    {src: '/img/scroll-1.png' }, 
-    {src: '/img/shield-1.png' }, 
-    {src: '/img/sword-1.png' }
+    {src: '/img/helmet-1.png', matched: false }, 
+    {src: '/img/potion-1.png', matched: false }, 
+    {src: '/img/ring-1.png', matched: false }, 
+    {src: '/img/scroll-1.png', matched: false }, 
+    {src: '/img/shield-1.png', matched: false }, 
+    {src: '/img/sword-1.png', matched: false }
 ]
 
 function App() {
@@ -38,9 +38,20 @@ function App() {
   // compare the choices
   const compareSelectedChoices = () => { 
     if(choiceOne && choiceTwo) {
-      choiceOne.src === choiceTwo.src ? console.log('match') : console.log('no match')
+      choiceOne.src === choiceTwo.src && makeMatched()
       resetChoices()
     }
+  }
+
+  // make the matched property true
+  const makeMatched = () => {
+    const newCards = cards.map(card => {
+      if(card.src === choiceOne.src || card.src === choiceTwo.src) {
+        return {...card, matched: true}
+      }
+      return card
+    })
+    setCards(newCards)
   }
 
   // reset choices
@@ -50,11 +61,12 @@ function App() {
     setTurns(turns + 1)
   }
 
-  // call the compareSelectedChoicesfunction to check if the cards match
+  // compare 2 selected cards
   useEffect(() => {
     compareSelectedChoices()
   }, [choiceOne, choiceTwo])
 
+  
   return (
     <div className="App">
       <h1>Memory Game</h1>
