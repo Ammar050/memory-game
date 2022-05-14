@@ -71,6 +71,11 @@ function App() {
     setCanclick(true)
   }
 
+  // shuffle the cards on first render
+  useEffect(() => {
+    shuffleCards()
+  }, [])
+
   // compare 2 selected cards
   useEffect(() => {
     compareSelectedChoices()
@@ -80,9 +85,7 @@ function App() {
   return (
     <div className="App">
       <h1>Memory Game</h1>
-      <h3>{turns}</h3>
-      <button onClick={shuffleCards}>{cards.length ? 'New Game' : 'Start Game'}</button>
-      
+      <button onClick={shuffleCards}>New Game</button> 
       <div className="cards">
         { cards.map( card => (
           <SingleCard 
@@ -94,6 +97,7 @@ function App() {
           />
         )) }
       </div>
+      <p>Turns: {turns}</p>
     </div>
   );
 }
