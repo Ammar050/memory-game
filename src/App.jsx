@@ -16,7 +16,7 @@ const cardImages = [
 function App() {
 
     const [ cards, setCards ] = useState([])
-    const [ turn, setTurn ] = useState(0)
+    const [ turns, setTurns ] = useState(0)
     const [ choiceOne, setChoiceOne ] = useState(null)
     const [ choiceTwo, setChoiceTwo ] = useState(null)
 
@@ -27,7 +27,7 @@ function App() {
     .map(card => ({...card, id: Math.random()}))
 
     setCards(shuffledCards)
-    setTurn(0)
+    setTurns(0)
   }
 
   // handle the choice 
@@ -35,14 +35,30 @@ function App() {
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card)
   }
 
-  // shuffle the cards on first render
+  // compare the choices
+  const compareSelectedChoices = () => { 
+    if(choiceOne && choiceTwo) {
+      choiceOne.src === choiceTwo.src ? console.log('match') : console.log('no match')
+      resetChoices()
+    }
+  }
+
+  // reset choices
+  const resetChoices = () => { 
+    setChoiceOne(null)
+    setChoiceTwo(null)
+    setTurns(turns + 1)
+  }
+
+  // call the compareSelectedChoicesfunction to check if the cards match
   useEffect(() => {
-    shuffleCards()
-  }, [])
+    compareSelectedChoices()
+  }, [choiceOne, choiceTwo])
 
   return (
     <div className="App">
       <h1>Memory Game</h1>
+      <h3>{turns}</h3>
       <button onClick={shuffleCards}>New Game</button>
       
       <div className="cards">
