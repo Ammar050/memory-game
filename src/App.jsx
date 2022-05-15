@@ -85,6 +85,8 @@ function App() {
         setWidth(document.body.clientWidth)
         setHeight(window.screen.height)
         setCelebration(true)
+      } else if(realTurns > 10) {
+        document.getElementById('audio').play()
       }
     }
    }
@@ -123,6 +125,8 @@ function App() {
         numberOfPieces={500}
         />
       }
+      {/* this audio will play when the user matched all the cards with 11 or heigher turns */}
+      <audio id='audio' controls src="./audio/noob.mp3" style={{display: 'none'}}></audio>
     </div>
   );
 }
