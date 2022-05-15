@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import Confetti from 'react-confetti'
 import './App.css'
 
 // componenets 
@@ -20,7 +21,9 @@ function App() {
     const [ choiceOne, setChoiceOne ] = useState(null)
     const [ choiceTwo, setChoiceTwo ] = useState(null)
     const [ canClick, setCanclick ] = useState(true)
-
+    const [ celebration, setCelebration ] = useState(false)
+    const [ height, setHeight ] = useState(null)
+    const [ width, setWidth ] = useState(null)
   // shuffle the cards
   const shuffleCards = () => {
     const shuffledCards = [...cardImages, ...cardImages] 
@@ -32,6 +35,7 @@ function App() {
     setChoiceOne(null)
     setChoiceTwo(null)
     setCanclick(true)
+    setCelebration(false)
   }
 
   // handle the choice 
@@ -77,7 +81,11 @@ function App() {
     const allMatched = newCards.every(card => card.matched)
     if(allMatched) {
       let realTurns = turns + 1
-      alert(`You won in ${realTurns} turns!`)
+      if(realTurns === 6 || realTurns === 7 || realTurns === 8) {
+        setWidth(document.body.clientWidth)
+        setHeight(window.screen.height)
+        setCelebration(true)
+      }
     }
    }
 
@@ -108,6 +116,13 @@ function App() {
         )) }
       </div>
       <p>Turns: {turns}</p>
+      { celebration && 
+        <Confetti
+        width={width}
+        height={height}
+        numberOfPieces={500}
+        />
+      }
     </div>
   );
 }
