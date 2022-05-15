@@ -61,6 +61,7 @@ function App() {
       return card
     })
     setCards(newCards)
+    checkIfAllMatched(newCards)
   }
 
   // reset choices
@@ -71,6 +72,15 @@ function App() {
     setCanclick(true)
   }
 
+  // check if all cards are matched
+  const checkIfAllMatched = (newCards) => { 
+    const allMatched = newCards.every(card => card.matched)
+    if(allMatched) {
+      let realTurns = turns + 1
+      alert(`You won in ${realTurns} turns!`)
+    }
+   }
+
   // shuffle the cards on first render
   useEffect(() => {
     shuffleCards()
@@ -79,7 +89,7 @@ function App() {
   // compare 2 selected cards
   useEffect(() => {
     compareSelectedChoices()
-  }, [choiceOne, choiceTwo])
+  }, [choiceTwo])
 
 
   return (
